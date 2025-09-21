@@ -183,13 +183,24 @@ CSocket_send(&udp_sock, msg, strlen(msg), "127.0.0.1", 5000);
 ```c
 ssize_t CSocket_recv(CSocket *s, void *buf, size_t len, char *host, uint16_t *port);
 ```
+- **s** → Pointer to `CSocket` object.
+
+- **buf** → Buffer to store received data.
+
+- **len** → Size of the buffer.
+
+- **host** → (UDP only) Optional, stores sender’s IP.
+
+- **port** → (UDP only) Optional, stores sender’s port.
 
 **Example (TCP):**
 ```c
 char buf[1024];
 CSocket_recv(&tcp_sock, buf, sizeof(buf), NULL, NULL);
 ```
-For TCP, `host` and `port` are ignored, so `NULL` can be passed.
+For TCP, `host` and `port` are ignored, so `NULL` can be passed.    
+
+
 **Example (UDP):**
 
 ```c
