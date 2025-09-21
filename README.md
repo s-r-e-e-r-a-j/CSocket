@@ -112,7 +112,7 @@ CSocket_bind(&udp_sock, "0.0.0.0", 5000);
 
 ---
 
-7. ***CSocket_listen (TCP only)**
+7. **CSocket_listen (TCP only)**
 ```c
 bool CSocket_listen(CSocket *s, int backlog);
 ```
