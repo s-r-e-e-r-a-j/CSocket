@@ -189,6 +189,7 @@ ssize_t CSocket_recv(CSocket *s, void *buf, size_t len, char *host, uint16_t *po
 char buf[1024];
 CSocket_recv(&tcp_sock, buf, sizeof(buf), NULL, NULL);
 ```
+For TCP, `host` and `port` are ignored, so `NULL` can be passed.
 **Example (UDP):**
 
 ```c
@@ -197,3 +198,4 @@ char sender[128];
 uint16_t sender_port;
 CSocket_recv(&udp_sock, buf, sizeof(buf), sender, &sender_port);
 ```
+For UDP, you usually want to know who sent the packet, so provide `host` and `port`.
