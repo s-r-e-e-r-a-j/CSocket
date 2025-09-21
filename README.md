@@ -92,3 +92,44 @@ CSocket_set_reuseaddr(&tcp_sock, true);
 ```
 
 ---
+
+### Server Functions
+
+6. **CSocket_bind**
+```c
+bool CSocket_bind(CSocket *s, const char *host, uint16_t port);
+```
+
+**Example (TCP):**
+```c
+CSocket_bind(&tcp_sock, "127.0.0.1", 5555);
+```
+
+**Example (UDP):**
+```c
+CSocket_bind(&udp_sock, "0.0.0.0", 5000);
+```
+
+---
+
+7. ***CSocket_listen (TCP only)**
+```c
+bool CSocket_listen(CSocket *s, int backlog);
+```
+**Example:**
+```c
+CSocket_listen(&tcp_sock, 10);
+```
+
+---
+
+8. **CSocket_accept (TCP only)**
+```c
+CSocket CSocket_accept(CSocket *s);
+```
+**Example:**
+```c
+CSocket client = CSocket_accept(&tcp_sock);
+```
+
+---
