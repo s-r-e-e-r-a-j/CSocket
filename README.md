@@ -46,3 +46,39 @@ CSocket CSocket_create(CS_Type type, CS_Family family);
 CSocket tcp_sock = CSocket_create(CS_TCP, CS_AF_INET);
 CSocket udp_sock = CSocket_create(CS_UDP, CS_AF_INET6);
 ```
+
+2. **Close Socket**
+```c
+void CSocket_close(CSocket *s);
+```
+**Example:**
+```c
+CSocket_close(&tcp_sock);
+```
+
+## Socket Options
+
+3. **Set Blocking / Non-blocking**
+```c
+void CSocket_set_blocking(CSocket *s, bool blocking);
+```
+**Example:**
+```c
+CSocket_set_blocking(&tcp_sock, false);
+```
+4. ***Set Timeout**
+```c
+void CSocket_set_timeout(CSocket *s, int sec);
+```
+**Example:**
+```c
+CSocket_set_timeout(&tcp_sock, 5);
+```
+5. **Set Reuse Address**
+```c
+void CSocket_set_reuseaddr(CSocket *s, bool reuse);
+```
+**Example:**
+```c
+CSocket_set_reuseaddr(&tcp_sock, true);
+```
