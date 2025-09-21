@@ -132,3 +132,17 @@ CSocket client = CSocket_accept(&tcp_sock);
 ```
 
 ---
+
+9. **CSocket_connect**
+```c
+bool CSocket_connect(CSocket *s, const char *host, uint16_t port);
+```
+
+**Example (TCP client):**
+```c
+CSocket_connect(&tcp_sock, "127.0.0.1", 5555);
+```
+**Example (UDP client, optional bind not needed):**
+```c
+CSocket_connect(&udp_sock, "127.0.0.1", 5000);
+```
