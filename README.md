@@ -25,3 +25,24 @@ Being **header-only**, it requires no compilation of separate source files—jus
 - **Header-only**: just include the header, no extra compilation required
 
 - **Powerful**: supports SSL, threaded servers, and RAW sockets in a single, easy-to-use API.
+
+
+
+
+## Socket Creation & Closing
+
+1. **Create Socket**
+2. 
+```c
+CSocket CSocket_create(CS_Type type, CS_Family family);
+```
+- **type** → `CS_TCP`, `CS_UDP`, `CS_RAW`
+
+- **family** → `CS_AF_INET` (IPv4), `CS_AF_INET6` (IPv6)
+
+**Example:**
+
+```c
+CSocket tcp_sock = CSocket_create(CS_TCP, CS_AF_INET);
+CSocket udp_sock = CSocket_create(CS_UDP, CS_AF_INET6);
+```
