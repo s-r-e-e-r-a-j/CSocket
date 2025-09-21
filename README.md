@@ -118,7 +118,7 @@ bool CSocket_listen(CSocket *s, int backlog);
 ```
 **Example:**
 ```c
-CSocket_listen(&tcp_sock, 10);
+CSocket_listen(&tcp_sock, 10); // Max 10 pending connections in the queue
 ```
 
 ---
