@@ -92,8 +92,6 @@ CSocket_set_reuseaddr(&tcp_sock, true);
 
 ---
 
----
-
 6. **CSocket_bind**
 ```c
 bool CSocket_bind(CSocket *s, const char *host, uint16_t port);
