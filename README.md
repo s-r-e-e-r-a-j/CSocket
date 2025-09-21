@@ -29,7 +29,6 @@ Being **header-only**, it requires no compilation of separate source files—jus
 
 
 
-### Socket Creation & Closing
 
 1. **Create Socket**
 ```c
@@ -58,7 +57,7 @@ CSocket_close(&tcp_sock);
 CSocket_close(&udp_sock);
 ```
 
-### Socket Options
+---
 
 3. **Set Blocking / Non-blocking**
 ```c
@@ -93,7 +92,7 @@ CSocket_set_reuseaddr(&tcp_sock, true);
 
 ---
 
-### Server Functions
+---
 
 6. **CSocket_bind**
 ```c
