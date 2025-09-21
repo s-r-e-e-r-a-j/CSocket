@@ -27,7 +27,7 @@ Being **header-only**, it requires no compilation of separate source files—jus
 - **Powerful**: supports SSL, threaded servers, and RAW sockets in a single, easy-to-use API.
 
 
-
+## API Examples
 
 
 1. **Create Socket**
