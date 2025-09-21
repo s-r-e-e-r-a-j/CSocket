@@ -144,3 +144,37 @@ CSocket_connect(&tcp_sock, "127.0.0.1", 5555);
 ```c
 CSocket_connect(&udp_sock, "127.0.0.1", 5000);
 ```
+
+---
+
+10. **CSocket_send**
+```c
+ssize_t CSocket_send(CSocket *s, const void *buf, size_t len, const char *host, uint16_t port);
+```
+
+**Examples:**
+
+**TCP (connection-oriented, host/port not needed):**
+
+```c
+const char *msg = "Hello TCP";
+CSocket_send(&tcp_sock, msg, strlen(msg), NULL, 0);
+```
+`len = strlen(msg)` → Number of bytes to send
+
+`host` and `port` are ignored for TCP because the socket is already connected
+
+**UDP (connectionless, host/port required):**
+```c
+const char *msg = "Hello UDP";
+CSocket_send(&udp_sock, msg, strlen(msg), "127.0.0.1", 5000);
+```
+
+
+`len = strlen(msg)` → Number of bytes to send
+
+`host = "127.0.0.1"` → Destination IP
+
+`port = 5000` → Destination port
+
+---
