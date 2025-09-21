@@ -29,10 +29,9 @@ Being **header-only**, it requires no compilation of separate source files—jus
 
 
 
-## Socket Creation & Closing
+### Socket Creation & Closing
 
 1. **Create Socket**
-2. 
 ```c
 CSocket CSocket_create(CS_Type type, CS_Family family);
 ```
@@ -47,6 +46,8 @@ CSocket tcp_sock = CSocket_create(CS_TCP, CS_AF_INET);
 CSocket udp_sock = CSocket_create(CS_UDP, CS_AF_INET6);
 ```
 
+---
+
 2. **Close Socket**
 ```c
 void CSocket_close(CSocket *s);
@@ -56,7 +57,7 @@ void CSocket_close(CSocket *s);
 CSocket_close(&tcp_sock);
 ```
 
-## Socket Options
+### Socket Options
 
 3. **Set Blocking / Non-blocking**
 ```c
@@ -66,7 +67,10 @@ void CSocket_set_blocking(CSocket *s, bool blocking);
 ```c
 CSocket_set_blocking(&tcp_sock, false);
 ```
-4. ***Set Timeout**
+
+---
+
+4. **Set Timeout**
 ```c
 void CSocket_set_timeout(CSocket *s, int sec);
 ```
@@ -74,6 +78,9 @@ void CSocket_set_timeout(CSocket *s, int sec);
 ```c
 CSocket_set_timeout(&tcp_sock, 5);
 ```
+
+---
+
 5. **Set Reuse Address**
 ```c
 void CSocket_set_reuseaddr(CSocket *s, bool reuse);
@@ -82,3 +89,5 @@ void CSocket_set_reuseaddr(CSocket *s, bool reuse);
 ```c
 CSocket_set_reuseaddr(&tcp_sock, true);
 ```
+
+---
