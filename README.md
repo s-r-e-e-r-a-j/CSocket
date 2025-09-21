@@ -20,8 +20,8 @@ Being **header-only**, it requires no compilation of separate source files—jus
 
 - **Host resolution** (DNS → IP)
 
-**Raw socket support** for advanced packet crafting
+- **Raw socket support** for advanced packet crafting
 
-**Header-only**: just include the header, no extra compilation required
+- **Header-only**: just include the header, no extra compilation required
 
-**Powerful**: supports SSL, threaded servers, and RAW sockets in a single, easy-to-use API.
+- **Powerful**: supports SSL, threaded servers, and RAW sockets in a single, easy-to-use API.
