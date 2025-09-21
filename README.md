@@ -66,7 +66,7 @@ void CSocket_set_blocking(CSocket *s, bool blocking);
 ```
 **Example:**
 ```c
-CSocket_set_blocking(&tcp_sock, false);
+CSocket_set_blocking(&tcp_sock, false); // Non-blocking
 ```
 
 ---
@@ -77,7 +77,7 @@ void CSocket_set_timeout(CSocket *s, int sec);
 ```
 **Example:**
 ```c
-CSocket_set_timeout(&tcp_sock, 5);
+CSocket_set_timeout(&udp_sock, 5); // 5 seconds timeout
 ```
 
 ---
