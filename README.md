@@ -55,6 +55,7 @@ void CSocket_close(CSocket *s);
 **Example:**
 ```c
 CSocket_close(&tcp_sock);
+CSocket_close(&udp_sock);
 ```
 
 ### Socket Options
