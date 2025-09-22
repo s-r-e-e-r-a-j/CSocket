@@ -452,3 +452,31 @@ bool CSocket_start_threaded_server(
     void *userdata
 );
 ```
+
+**Example**
+```c
+#include "CSocket.h"
+#include <stdio.h>
+
+void handle_client(CSocket client, void *userdata) {
+    char buffer[1024];
+    ssize_t n;
+    while((n = CSocket_recv(&client, buffer, sizeof(buffer), NULL, NULL)) > 0) {
+        // For text-based data, null-terminate for printf
+        if(n < sizeof(buffer)) buffer[n] = '\0';
+        printf("Received: %s\n", buffer);
+        CSocket_send(&client, buffer, n, NULL, 0); // echo back
+    }
+}
+
+int main() {
+    CSocket server = CSocket_create(CS_TCP, CS_AF_INET);
+    CSocket_bind(&server, "0.0.0.0", 5555);
+
+    printf("Starting threaded TCP server on port 5555...\n");
+    CSocket_start_threaded_server(&server, 10, handle_client, NULL);
+    CSocket_close(&server);
+    return 0;
+}
+
+```
