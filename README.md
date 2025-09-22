@@ -210,3 +210,29 @@ uint16_t sender_port;
 CSocket_recv(&udp_sock, buf, sizeof(buf), sender, &sender_port);
 ```
 For UDP, you usually want to know who sent the packet, so provide `host` and `port`.
+
+---
+
+12. **CSocket_sendall**
+```c
+bool CSocket_sendall(CSocket *s, const void *buf, size_t len);
+```
+
+- **s** → Pointer to `CSocket`.
+
+- **buf** → Data buffer to send.
+
+- **len** → Number of bytes to send.
+
+**Example (TCP):**
+```c
+const char *msg = "This will send the full message even if split into chunks";
+CSocket_sendall(&tcp_sock, msg, strlen(msg));
+```
+- Sends all **data** (retries internally if needed).
+
+- Works only with **TCP/SSL** (stream sockets).
+
+- Not used for UDP (datagrams).
+
+---
