@@ -293,7 +293,7 @@ bool CSocket_resolve_host(const char *hostname, char *ip, CS_Family family);
 
 - Resolves a hostname to an IP address (IPv4 or IPv6).
 
-- Returns `true| on success, `false` on failure.
+- Returns `true` on success, `false` on failure.
 
 **Example (IPv4):**
 ```c
