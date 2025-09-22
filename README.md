@@ -239,7 +239,7 @@ CSocket_sendall(&tcp_sock, msg, strlen(msg));
 
 13. **CSocket_recv_line**
 ```c
-ssize_t CSocket_recv_line(CSocket *s, char *buf, size_t len);
+ssize_t CSocket_recv_line(CSocket *s, char *buf, size_t max_len);
 ```
 
 - Reads until a newline `\n` is received.
@@ -256,7 +256,7 @@ CSocket_recv_line(&tcp_sock, buf, sizeof(buf));
 
 14. **CSocket_recv_until**
 ```c
-ssize_t CSocket_recv_until(CSocket *s, char *buf, size_t len, char delim);
+ssize_t CSocket_recv_until(CSocket *s, char *buf, size_t max_len, char delim);
 ```
 
 - Reads from the socket until the given delimiter character `delim` is found.
