@@ -417,3 +417,28 @@ CSocket_ssl_send(&tcp_client, "Hello SSL", strlen("Hello SSL"));
 ```
 
 ---
+
+5. **CSocket_ssl_recv**
+```c
+ssize_t CSocket_ssl_recv(CSocket *s, void *buf, size_t len);
+```
+
+- Receives data over an SSL/TLS connection.
+
+- Arguments:
+
+  - `s` → pointer to your SSL-enabled `CSocket`.
+
+  - `buf` → buffer to store received data.
+
+  - `len` → size of buffer.
+
+- Returns -1 on error.
+
+**Example:**
+```c
+char buf[1024];
+CSocket_ssl_recv(&tcp_client, buf, sizeof(buf));
+```
+
+---
