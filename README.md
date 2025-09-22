@@ -497,7 +497,8 @@ CSocket_ssl_recv(&tcp_client, buf, sizeof(buf));
 
 ---
 
-21. **CSocket_start_threaded_server(TCP only)**
+21. **CSocket_start_threaded_server**
+- **TCP-only**
 ```c
 bool CSocket_start_threaded_server(
     CSocket *server, 
