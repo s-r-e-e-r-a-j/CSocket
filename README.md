@@ -323,8 +323,8 @@ if (CSocket_resolve_host("facebook.com", ip, CS_AF_INET6)) {
 
 ---
 
-### SSL/TLS Functions
-1. **CSocket_init_ssl**
+
+16. **CSocket_init_ssl**
 ```c
 void CSocket_init_ssl();
 ```
@@ -339,7 +339,7 @@ CSocket_init_ssl();
 ```
 ---
 
-2. **CSocket_cleanup_ssl**
+17. **CSocket_cleanup_ssl**
 ```c
 void CSocket_cleanup_ssl();
 ```
@@ -355,7 +355,7 @@ CSocket_cleanup_ssl();
 
 ---
 
-3. **CSocket_enable_ssl**
+18. **CSocket_enable_ssl**
 ```c
 bool CSocket_enable_ssl(CSocket *s, bool server, const char *cert_file, const char *key_file);
 ```
@@ -394,7 +394,7 @@ CSocket_enable_ssl(&tcp_client, false, NULL, NULL);
 
 ---
 
-4. **CSocket_ssl_send**
+19. **CSocket_ssl_send**
 ```c
 ssize_t CSocket_ssl_send(CSocket *s, const void *buf, size_t len);
 ```
@@ -418,7 +418,7 @@ CSocket_ssl_send(&tcp_client, "Hello SSL", strlen("Hello SSL"));
 
 ---
 
-5. **CSocket_ssl_recv**
+20. **CSocket_ssl_recv**
 ```c
 ssize_t CSocket_ssl_recv(CSocket *s, void *buf, size_t len);
 ```
@@ -442,3 +442,13 @@ CSocket_ssl_recv(&tcp_client, buf, sizeof(buf));
 ```
 
 ---
+
+21. **CSocket_start_threaded_server**
+```c
+bool CSocket_start_threaded_server(
+    CSocket *server, 
+    int backlog, 
+    CSocket_client_handler handler, 
+    void *userdata
+);
+```
