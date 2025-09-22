@@ -438,7 +438,7 @@ bool CSocket_enable_ssl(CSocket *s, bool server, const char *cert_file, const ch
 
 - Returns `true` on success, `false` on error.
 
-- If the certificate/key file is missing, a self-signed certificate is automatically generated.
+- If the certificate/key file is missing, a self-signed certificate and key is automatically generated.
 
 **Example (Server):**
 ```c
