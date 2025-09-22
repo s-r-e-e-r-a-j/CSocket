@@ -375,3 +375,19 @@ bool CSocket_enable_ssl(CSocket *s, bool server, const char *cert_file, const ch
 - Returns `true` on success, `false` on error.
 
 - If the certificate/key file is missing, a self-signed certificate is automatically generated.
+
+**Example (Server):**
+```c
+CSocket tcp_server = CSocket_create(CS_TCP, CS_AF_INET);
+CSocket_bind(&tcp_server, "127.0.0.1", 4433);
+CSocket_listen(&tcp_server, 5);
+
+CSocket_enable_ssl(&tcp_server, true, "server.crt", "server.key");
+```
+
+**Example (Client):**
+```c
+CSocket tcp_client = CSocket_create(CS_TCP, CS_AF_INET);
+CSocket_connect(&tcp_client, "127.0.0.1", 4433);
+CSocket_enable_ssl(&tcp_client, false, NULL, NULL);
+```
