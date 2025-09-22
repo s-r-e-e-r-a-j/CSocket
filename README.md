@@ -352,3 +352,26 @@ void CSocket_cleanup_ssl();
 ```c
 CSocket_cleanup_ssl();
 ```
+
+---
+
+3. **CSocket_enable_ssl**
+```c
+bool CSocket_enable_ssl(CSocket *s, bool server, const char *cert_file, const char *key_file);
+```
+
+- Enables SSL/TLS for a socket.
+
+- Arguments:
+
+  - `s` → pointer to your `CSocket`.
+
+  - `server` → `true` for server mode, `false` for client mode.
+
+  - `cert_file` → path to certificate file (required for server).
+
+  - `key_file` → path to private key file (required for server).
+
+- Returns `true` on success, `false`
+
+- If the certificate/key file is missing, a self-signed certificate is automatically generated.
