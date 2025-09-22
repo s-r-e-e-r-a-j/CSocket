@@ -27,6 +27,56 @@ Being **header-only**, it requires no compilation of separate source files—jus
 - **Powerful**: supports SSL, threaded servers, and RAW sockets in a single, easy-to-use API.
 
 
+## Setup
+
+1. **Place the header file**
+
+Make sure `CSocket.h` is in the same directory as your source file (`.c`).
+
+2. **Include the header**
+   
+At the top of your `.c` file, include the library:
+
+```c
+#include "CSocket.h"
+```
+
+3. **Install OpenSSL**
+
+**Debian/Ubuntu/Parrot/Kali:**
+```bash
+sudo apt update
+sudo apt install libssl-dev
+```
+
+**RHEL/CentOS/Fedora:**
+```bash
+sudo dnf install openssl-devel
+```
+
+**Arch Linux/Manjaro:**
+```bash
+sudo pacman -S openssl
+```
+
+**Termux (Android):**
+```bash
+pkg install openssl
+```
+
+4. **Compile your program**
+Link with **pthread** and **OpenSSL**:
+
+```bash
+gcc your_program.c -o your_program -lpthread -lssl -lcrypto
+```
+
+5. **Run your program**
+
+```bash
+./your_program
+```
+
 ## API Examples
 
 
