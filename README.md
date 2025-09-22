@@ -322,3 +322,33 @@ if (CSocket_resolve_host("facebook.com", ip, CS_AF_INET6)) {
 - Always check the return value: `true` = success, `false` = failure.
 
 ---
+
+### SSL/TLS Functions
+1. **CSocket_init_ssl**
+```c
+void CSocket_init_ssl();
+```
+
+- Initializes the OpenSSL library.
+
+- Must be called **once before using SSL sockets**.
+
+**Example:**
+```c
+CSocket_init_ssl();
+```
+---
+
+2. **CSocket_cleanup_ssl**
+```c
+void CSocket_cleanup_ssl();
+```
+
+- Cleans up OpenSSL resources.
+
+- Call this when your program is done with SSL.
+
+**Example:**
+```c
+CSocket_cleanup_ssl();
+```
