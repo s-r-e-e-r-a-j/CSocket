@@ -156,6 +156,7 @@ CSocket_set_reuseaddr(&tcp_sock, true);
 ```c
 bool CSocket_bind(CSocket *s, const char *host, uint16_t port);
 ```
+- `CSocket_bind` – Assigns IP and port to a socket.
 
 **Example (TCP):**
 ```c
@@ -173,7 +174,9 @@ CSocket_bind(&udp_sock, "0.0.0.0", 5000);
 ```c
 bool CSocket_listen(CSocket *s, int backlog);
 ```
+- `CSocket_listen` – Prepares a TCP socket to accept incoming connections.
 **Example:**
+  
 ```c
 CSocket_listen(&tcp_sock, 10); // Max 10 pending connections in the queue
 ```
