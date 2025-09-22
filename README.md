@@ -175,6 +175,7 @@ CSocket_bind(&udp_sock, "0.0.0.0", 5000);
 bool CSocket_listen(CSocket *s, int backlog);
 ```
 - `CSocket_listen` – Prepares a TCP socket to accept incoming connections.
+  
 **Example:**
   
 ```c
