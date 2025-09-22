@@ -236,3 +236,37 @@ CSocket_sendall(&tcp_sock, msg, strlen(msg));
 - Not used for UDP (datagrams).
 
 ---
+
+13. **CSocket_recv_line**
+```c
+ssize_t CSocket_recv_line(CSocket *s, void *buf, size_t len);
+```
+
+- Reads until a newline `\n` is received.
+
+- **TCP-only** (stream-oriented).
+
+**Example (TCP):**
+```c
+char buf[1024];
+CSocket_recv_line(&tcp_sock, buf, sizeof(buf));
+```
+
+---
+
+14. **CSocket_recv_until**
+```c
+ssize_t CSocket_recv_until(CSocket *s, void *buf, size_t len, char delim);
+```
+
+- Reads from the socket until the given delimiter character `delim` is found.
+
+- **TCP-only** (stream-oriented).
+
+- The delimiter is **any character you choose**. Common examples:
+
+   -`'\n'` → read until      newline (line-based  protocol).
+
+   - `';'` → read until semicolon.
+
+   - `':'` → read until colon.
