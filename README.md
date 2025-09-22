@@ -139,6 +139,8 @@ CSocket_set_timeout(&udp_sock, 5); // 5 seconds timeout
 ```c
 void CSocket_set_reuseaddr(CSocket *s, bool reuse);
 ```
+- `CSocket_set_reuseaddr` – Allows a server socket to reuse a port immediately after it has been closed, preventing “Address already in use” errors when restarting the server.
+
 **Example:**
 ```c
 CSocket_set_reuseaddr(&tcp_sock, true);
