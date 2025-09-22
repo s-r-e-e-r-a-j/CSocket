@@ -1,6 +1,6 @@
 ## CSocket 
 
-**CSocket** is a **powerful, header-only C socket library** that simplifies creating and managing **TCP**, **UDP**, and **RAW sockets** for **IPv4** and **IPv6**. It supports **SSL/TLS connections**, **threaded TCP servers**, and provides utilities for **host resolution** and advanced socket options.
+**CSocket** is a powerful, header-only C networking library that simplifies working with TCP, UDP, and RAW sockets for IPv4 and IPv6. It includes SSL/TLS support, threaded TCP servers, host resolution, and advanced socket options.
 
 ## Features
 
