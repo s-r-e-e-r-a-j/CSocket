@@ -8,7 +8,7 @@
 
 - **IP Versions**: IPv4, IPv6
 
-- **SSL/TLS**: Server support with automatic self-signed certificate generation
+- **SSL/TLS**: Supports SSL/TLS communication. The server can use a custom certificate and private key, or automatically generate a self-signed certificate and key if none are provided. Clients can securely connect over SSL/TLS.
 
 - **Blocking/Non-blocking sockets**
 
