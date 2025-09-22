@@ -270,3 +270,18 @@ ssize_t CSocket_recv_until(CSocket *s, void *buf, size_t len, char delim);
    - `';'` → read until semicolon.
 
    - `':'` → read until colon.
+
+
+**Example (TCP, read until `;`):**
+```c
+char buf[1024];
+CSocket_recv_until(&tcp_sock, buf, sizeof(buf), ';'); // reads until ';' is found
+```
+
+**Example (TCP, read until newline):**
+```c
+char buf[1024];
+CSocket_recv_until(&tcp_sock, buf, sizeof(buf), '\n'); // reads until '\n'
+```
+
+---
