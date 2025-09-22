@@ -68,7 +68,7 @@ pkg install openssl
 Link with **pthread** and **OpenSSL**:
 
 ```bash
-gcc your_program.c -o your_program -lpthread -lssl -lcrypto
+gcc your_program.c -o your_program -pthread -lssl -lcrypto
 ```
 
 5. **Run your program**
