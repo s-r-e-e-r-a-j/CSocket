@@ -188,6 +188,9 @@ CSocket_listen(&tcp_sock, 10); // Max 10 pending connections in the queue
 ```c
 CSocket CSocket_accept(CSocket *s);
 ```
+
+- `CSocket_accept` – Accepts a new client connection on a server socket.
+
 **Example:**
 ```c
 CSocket client = CSocket_accept(&tcp_sock);
@@ -199,6 +202,8 @@ CSocket client = CSocket_accept(&tcp_sock);
 ```c
 bool CSocket_connect(CSocket *s, const char *host, uint16_t port);
 ```
+
+- `CSocket_connect` – Connects a client socket to a server at a given IP and port.
 
 **Example (TCP client):**
 ```c
