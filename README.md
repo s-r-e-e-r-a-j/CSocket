@@ -265,7 +265,7 @@ ssize_t CSocket_recv_until(CSocket *s, void *buf, size_t len, char delim);
 
 - The delimiter is **any character you choose**. Common examples:
 
-   -`'\n'` → read until      newline (line-based  protocol).
+   - `'\n'` → read until      newline (line-based  protocol).
 
    - `';'` → read until semicolon.
 
