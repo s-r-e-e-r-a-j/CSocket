@@ -29,9 +29,15 @@ Being **header-only**, it requires no compilation of separate source files—jus
 
 ## Setup
 
-1. **Place the header file**
+1. **Place `CSocket.h` in the same directory as your `.c` source file.**
+   
+Example:
 
-Make sure `CSocket.h` is in the same directory as your source file (`.c`).
+```bash
+project/
+├── CSocket.h
+└── test.c
+```
 
 2. **Include the header**
    
@@ -41,7 +47,7 @@ At the top of your `.c` file, include the library:
 #include "CSocket.h"
 ```
 
-3. **Install OpenSSL**
+3. **Install OpenSSL**(required for SSL/TLS features).
 
 **Debian/Ubuntu/Parrot/Kali:**
 ```bash
