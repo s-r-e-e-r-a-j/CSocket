@@ -117,7 +117,9 @@ CSocket_close(&udp_sock);
 ```c
 void CSocket_set_blocking(CSocket *s, bool blocking);
 ```
-- Makes the socket blocking or non-blocking.
+- **Non-blocking:** sockets return immediately if no data is available, instead of waiting.
+
+- **Blocking:** sockets wait until data is available before returning.
 
 **Example:**
 ```c
