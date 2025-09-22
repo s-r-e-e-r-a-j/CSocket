@@ -8,7 +8,7 @@
 
 - **IP Versions**: IPv4, IPv6
 
-- **SSL/TLS**: Server & client support with automatic self-signed certificate generation
+- **SSL/TLS**: Server support with automatic self-signed certificate generation
 
 - **Blocking/Non-blocking sockets**
 
