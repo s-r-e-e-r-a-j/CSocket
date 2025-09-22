@@ -36,7 +36,7 @@ Example:
 ```bash
 project/
 ├── CSocket.h
-└── test.c
+└── your_program.c
 ```
 
 2. **Include the header**
