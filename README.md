@@ -285,3 +285,40 @@ CSocket_recv_until(&tcp_sock, buf, sizeof(buf), '\n'); // reads until '\n'
 ```
 
 ---
+
+15. **CSocket_resolve_host**
+```c
+bool CSocket_resolve_host(const char *hostname, char *ip, CS_Family family);
+```
+
+- Resolves a hostname to an IP address (IPv4 or IPv6).
+
+- Returns `true| on success, `false` on failure.
+
+**Example (IPv4):**
+```c
+char ip[CS_MAX_ADDR_LEN];
+if (CSocket_resolve_host("facebook.com", ip, CS_AF_INET)) {
+    printf("Resolved IP: %s\n", ip);
+} else {
+    printf("Failed to resolve hostname\n");
+}
+```
+
+**Example (IPv6):**
+```c
+char ip[CS_MAX_ADDR_LEN];
+if (CSocket_resolve_host("facebook.com", ip, CS_AF_INET6)) {
+    printf("Resolved IP: %s\n", ip);
+} else {
+    printf("Failed to resolve hostname\n");
+}
+```
+
+- For **IPv4**, the resolved IP will be in dotted-decimal form (e.g., `127.0.0.1`).
+
+- For **IPv6**, the resolved IP will be in standard IPv6 format.
+
+- Always check the return value: `true` = success, `false` = failure.
+
+---
