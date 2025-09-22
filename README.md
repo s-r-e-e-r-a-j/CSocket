@@ -391,3 +391,29 @@ CSocket tcp_client = CSocket_create(CS_TCP, CS_AF_INET);
 CSocket_connect(&tcp_client, "127.0.0.1", 4433);
 CSocket_enable_ssl(&tcp_client, false, NULL, NULL);
 ```
+
+---
+
+4. **CSocket_ssl_send**
+```c
+ssize_t CSocket_ssl_send(CSocket *s, const void *buf, size_t len);
+```
+
+- Sends data over an SSL/TLS connection.
+
+- Arguments:
+
+  - `s` → pointer to your SSL-enabled `CSocket`.
+
+  - `buf` → data buffer to send.
+
+  - `len` → length of data.
+
+- Returns `-1` on error.
+
+**Example:**
+```c
+CSocket_ssl_send(&tcp_client, "Hello SSL", strlen("Hello SSL"));
+```
+
+---
