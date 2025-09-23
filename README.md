@@ -719,7 +719,7 @@ int main() {
             continue;
         }
 
-        buffer[r] = '\0';
+        buffer[r] = '\0';   // Null-terminate the string
         printf("[UDP Server] Received from %s:%d -> %s\n", client_ip, client_port, buffer);
 
         // Send a reply
@@ -759,7 +759,7 @@ int main() {
     // Receive reply from server
     ssize_t r = CSocket_recv(&client, buffer, sizeof(buffer)-1, NULL, NULL);
     if (r > 0) {
-        buffer[r] = '\0';
+        buffer[r] = '\0';   // Null-terminate the string
         printf("[UDP Client] Server replied: %s", buffer);
     } else {
         printf("[UDP Client] No reply (timeout or error)\n");
@@ -881,7 +881,7 @@ int main() {
     // Receive reply from server
     ssize_t r = CSocket_recv(&client, buffer, sizeof(buffer)-1, NULL, NULL);
     if (r > 0) {
-        buffer[r] = '\0';
+        buffer[r] = '\0';   // Null-terminate the string
         printf("[Client] Server replied: %s", buffer);
     } else {
         printf("[Client] No reply or error.\n");
