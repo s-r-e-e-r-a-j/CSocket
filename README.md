@@ -557,5 +557,128 @@ int main() {
 
 ```
 
+## Example program's 
+
+### TCP Server
+```c
+
+#include "csocket.h"  // Include our CSocket library
+#include <stdio.h>    // Include standard I/O functions
+
+int main() {
+    // Create a TCP socket using IPv4
+    CSocket server = CSocket_create(CS_TCP, CS_AF_INET);
+
+    // Allow the server to reuse the port immediately after restarting
+    CSocket_set_reuseaddr(&server, true);
+
+    // Bind the server to all network interfaces on port 8080
+    if (!CSocket_bind(&server, "0.0.0.0", 8080)) {
+        perror("Bind failed");
+        return 1;
+    }
+
+    // Start listening for incoming connections
+    if (!CSocket_listen(&server, 5)) {
+        perror("Listen failed");
+        return 1;
+    }
+
+    printf("Server listening on port 8080...\n");
+
+    // Accept a single client connection
+    CSocket client = CSocket_accept(&server);
+
+    if (client.fd < 0) {
+        perror("Accept failed");
+        CSocket_close(&server);
+        return 1;
+    }
+
+    printf("Client connected!\n");
+
+    // Set a 5-second timeout for receiving data
+    CSocket_set_timeout(&client, 5);
+
+    // Make the socket blocking
+    CSocket_set_blocking(&client, true);
+
+    char buffer[CS_BUFFER_SIZE];  // Buffer for incoming data
+    const char *reply = "Message received!\n";  // Custom message to send
+
+    while (1) {
+        // Receive data from client
+        ssize_t r = CSocket_recv(&client, buffer, sizeof(buffer)-1, NULL, NULL);
+
+        // If client disconnected or timed out, break
+        if (r <= 0) {
+            printf("Client disconnected or timeout.\n");
+            break;
+        }
+
+        buffer[r] = '\0';              // Null-terminate string
+        printf("Received: %s\n", buffer); // Print received message
+
+        // Send  reply to client
+        CSocket_send(&client, reply, strlen(reply), NULL, 0);
+    }
+
+    // Close sockets
+    CSocket_close(&client);
+    CSocket_close(&server);
+
+    return 0;
+}
+
+```
+
+### TCP Client
+
+```c
+#include "csocket.h"  // Include our CSocket library
+#include <stdio.h>    // Include standard I/O functions
+
+int main() {
+    // Create a TCP client socket using IPv4
+    CSocket client = CSocket_create(CS_TCP, CS_AF_INET);
+
+    // Set a 5-second timeout for receiving data
+    CSocket_set_timeout(&client, 5);
+
+    // Make the socket blocking (wait for responses)
+    CSocket_set_blocking(&client, true);
+
+    // Connect to the server at 127.0.0.1:8080
+    if (!CSocket_connect(&client, "127.0.0.1", 8080)) {
+        perror("Connect failed");  // Print error if connection fails
+        return 1;                  // Exit program
+    }
+
+    printf("Connected to server.\n");  // Inform user that connection succeeded
+
+    const char *msg = "Hello Server!\n";  // Message to send
+
+    // Send the message to the server
+    CSocket_send(&client, msg, strlen(msg), NULL, 0);
+
+    char buffer[CS_BUFFER_SIZE];  // Buffer to store server response
+
+    // Receive response from the server
+    ssize_t r = CSocket_recv(&client, buffer, sizeof(buffer)-1, NULL, NULL);
+
+    if (r > 0) {
+        buffer[r] = '\0';                // Null-terminate the string
+        printf("Server replied: %s\n", buffer);  // Print server reply
+    } else {
+        printf("No reply (timeout or error)\n"); // Inform user if no response
+    }
+
+    // Close the client socket
+    CSocket_close(&client);
+
+    return 0;  // Exit program successfully
+}
+
+```
 ## License
 This project is licensed under the MIT License
