@@ -600,7 +600,7 @@ int main() {
     // Set a 5-second timeout for receiving data
     CSocket_set_timeout(&client, 5);
 
-    // Make the socket blocking
+    // Make the socket blocking(wait for responses)
     CSocket_set_blocking(&client, true);
 
     char buffer[CS_BUFFER_SIZE];  // Buffer for incoming data
@@ -677,6 +677,95 @@ int main() {
     CSocket_close(&client);
 
     return 0;  // Exit program successfully
+}
+
+```
+
+### UDP Server
+```c
+#include "csocket.h"
+#include <stdio.h>
+#include <string.h>
+
+#define SERVER_PORT 9090
+
+int main() {
+    // Create a UDP socket using IPv4
+    CSocket server = CSocket_create(CS_UDP, CS_AF_INET);
+
+    // Allow the server to reuse the port immediately
+    CSocket_set_reuseaddr(&server, true);
+
+    // Bind the server to all interfaces on port 9090
+    if (!CSocket_bind(&server, "0.0.0.0", SERVER_PORT)) {
+        perror("Bind failed");
+        return 1;
+    }
+
+    printf("[UDP Server] Listening on port %d...\n", SERVER_PORT);
+
+// blocking mode(wait for responses)
+  CSocket_set_blocking(&server, true);
+
+    char buffer[CS_BUFFER_SIZE];
+    char client_ip[CS_MAX_ADDR_LEN];
+    uint16_t client_port;
+
+    while (1) {
+        // Receive message from any client
+        ssize_t r = CSocket_recv(&server, buffer, sizeof(buffer)-1, client_ip, &client_port);
+        if (r <= 0) {
+            printf("[UDP Server] Timeout or error, waiting for new messages...\n");
+            continue;
+        }
+
+        buffer[r] = '\0';
+        printf("[UDP Server] Received from %s:%d -> %s\n", client_ip, client_port, buffer);
+
+        // Send a reply
+        const char *reply = "UDP Message received!\n";
+        CSocket_send(&server, reply, strlen(reply), client_ip, client_port);
+    }
+
+    CSocket_close(&server);
+    return 0;
+}
+```
+
+### UDP Client 
+```c
+#include "csocket.h"
+#include <stdio.h>
+#include <string.h>
+
+#define SERVER_IP "127.0.0.1"
+#define SERVER_PORT 9090
+
+int main() {
+    // Create a UDP client socket using IPv4
+    CSocket client = CSocket_create(CS_UDP, CS_AF_INET);
+
+    // blocking mode(wait for responses)  CSocket_set_blocking(&client, true);
+
+    const char *msg = "Hello UDP Server!\n";
+
+    // Send message to server
+    CSocket_send(&client, msg, strlen(msg), SERVER_IP, SERVER_PORT);
+    printf("[UDP Client] Sent: %s", msg);
+
+    char buffer[CS_BUFFER_SIZE];
+
+    // Receive reply from server
+    ssize_t r = CSocket_recv(&client, buffer, sizeof(buffer)-1, NULL, NULL);
+    if (r > 0) {
+        buffer[r] = '\0';
+        printf("[UDP Client] Server replied: %s", buffer);
+    } else {
+        printf("[UDP Client] No reply (timeout or error)\n");
+    }
+
+    CSocket_close(&client);
+    return 0;
 }
 
 ```
