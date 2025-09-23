@@ -105,6 +105,9 @@ CSocket udp_sock = CSocket_create(CS_UDP, CS_AF_INET6);
 ```c
 void CSocket_close(CSocket *s);
 ```
+- `CSocket_close` – Closes the socket and cleans up associated resources
+(SSL, context, file descriptor).
+
 **Example:**
 ```c
 CSocket_close(&tcp_sock);
@@ -132,6 +135,8 @@ CSocket_set_blocking(&tcp_sock, false); // Non-blocking
 ```c
 void CSocket_set_timeout(CSocket *s, int sec);
 ```
+- `CSocket_set_timeout` – Sets a time limit for sending and receiving data on a socket.
+  
 **Example:**
 ```c
 CSocket_set_timeout(&udp_sock, 5); // 5 seconds timeout
