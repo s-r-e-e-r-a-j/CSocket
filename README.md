@@ -704,8 +704,8 @@ int main() {
 
     printf("[UDP Server] Listening on port %d...\n", SERVER_PORT);
 
-  // blocking mode(wait for responses)
-  CSocket_set_blocking(&server, true);
+    // blocking mode(wait for responses)
+    CSocket_set_blocking(&server, true);
 
     char buffer[CS_BUFFER_SIZE];
     char client_ip[CS_MAX_ADDR_LEN];
@@ -746,8 +746,7 @@ int main() {
     CSocket client = CSocket_create(CS_UDP, CS_AF_INET);
 
     // blocking mode(wait for responses)
-
-CSocket_set_blocking(&client, true);
+    CSocket_set_blocking(&client, true);
 
     const char *msg = "Hello UDP Server!\n";
 
