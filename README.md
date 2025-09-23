@@ -527,6 +527,7 @@ bool CSocket_start_threaded_server(
     void *userdata
 );
 ```
+-  `CSocket_start_threaded_server` – Starts a TCP server that automatically accepts clients and creates a new thread for each connection, running the provided handler function.
 
 **Example**
 ```c
