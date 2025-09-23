@@ -562,7 +562,7 @@ int main() {
 ### TCP Server
 ```c
 
-#include "csocket.h"  // Include our CSocket library
+#include "CSocket.h"  // Include our CSocket library
 #include <stdio.h>    // Include standard I/O functions
 
 int main() {
@@ -635,7 +635,7 @@ int main() {
 ### TCP Client
 
 ```c
-#include "csocket.h"  // Include our CSocket library
+#include "CSocket.h"  // Include our CSocket library
 #include <stdio.h>    // Include standard I/O functions
 
 int main() {
@@ -683,7 +683,7 @@ int main() {
 
 ### UDP Server
 ```c
-#include "csocket.h"
+#include "CSocket.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -734,7 +734,7 @@ int main() {
 
 ### UDP Client 
 ```c
-#include "csocket.h"
+#include "CSocket.h"
 #include <stdio.h>
 #include <string.h>
 
