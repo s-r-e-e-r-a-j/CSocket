@@ -770,5 +770,131 @@ int main() {
 }
 
 ```
+### SSL/TLS TCP Server
+```c
+#include "CSocket.h"   //  CSocket library
+#include <stdio.h>
+#include <string.h>
+
+#define SERVER_PORT 8443
+#define CERT_FILE "server.crt"   // Path to SSL certificate
+#define KEY_FILE  "server.key"   // Path to SSL private key
+
+int main() {
+    // Create a TCP socket
+    CSocket server = CSocket_create(CS_TCP, CS_AF_INET);
+
+    // Initialize SSL
+    CSocket_init_ssl();
+
+    // Enable SSL for this socket
+    CSocket_enable_ssl(&server,true, CERT_FILE, KEY_FILE);
+
+    // Allow reusing the port immediately
+    CSocket_set_reuseaddr(&server, true);
+
+    // Bind to all network interfaces on SERVER_PORT
+    if (!CSocket_bind(&server, "0.0.0.0", SERVER_PORT)) {
+        perror("[Server] Bind failed");
+        return 1;
+    }
+
+    // Start listening
+    if (!CSocket_listen(&server, 5)) {
+        perror("[Server] Listen failed");
+        return 1;
+    }
+
+    printf("[Server] Listening on port %d (SSL)...\n", SERVER_PORT);
+
+    // Accept a client connection
+    CSocket client = CSocket_accept(&server);
+    if (client.fd < 0) {
+        perror("[Server] Accept failed");
+        CSocket_close(&server);
+        return 1;
+    }
+
+    printf("[Server] Client connected via SSL!\n");
+
+    char buffer[CS_BUFFER_SIZE];
+
+    // Receive a message from the client
+    ssize_t r = CSocket_recv(&client, buffer, sizeof(buffer)-1, NULL, NULL);
+    if (r > 0) {
+        buffer[r] = '\0';  // Null-terminate the string
+        printf("[Server] Received: %s\n", buffer);
+
+        // Send a reply
+        const char *reply = "Hello from SSL Server!\n";
+        CSocket_send(&client, reply, strlen(reply), NULL, 0);
+    } else {
+        printf("[Server] No message received.\n");
+    }
+
+    // Close client and server sockets
+    CSocket_close(&client);
+    CSocket_close(&server);
+    // Cleans up OpenSSL resources
+    CSocket_cleanup_ssl();
+    printf("[Server] SSL session closed.\n");
+    return 0;
+}
+```
+### SSL/TLS Client
+```c
+#include "CSocket.h"   // CSocket library
+#include <stdio.h>
+#include <string.h>
+
+#define SERVER_IP "127.0.0.1"
+#define SERVER_PORT 8443
+
+int main() {
+    // Create a TCP client socket
+    CSocket client = CSocket_create(CS_TCP, CS_AF_INET);
+
+    // Initilaize SSL
+    CSocket_init_ssl();
+
+    // Enable SSL for this client socket
+    CSocket_enable_ssl(&client,false, NULL, NULL);  // No cert and key needed for client
+
+    // Connect to SSL server
+    if (!CSocket_connect(&client, SERVER_IP, SERVER_PORT)) {
+        perror("[Client] Connection failed");
+        return 1;
+    }
+
+    printf("[Client] Connected to SSL server!\n");
+
+    // Send a message
+    const char *msg = "Hello SSL Server!\n";
+    if (CSocket_send(&client, msg, strlen(msg), NULL, 0) > 0) {
+        printf("[Client] Sent: %s", msg);
+    } else {
+        printf("[Client] Failed to send message.\n");
+    }
+
+    char buffer[CS_BUFFER_SIZE];
+
+    // Receive reply from server
+    ssize_t r = CSocket_recv(&client, buffer, sizeof(buffer)-1, NULL, NULL);
+    if (r > 0) {
+        buffer[r] = '\0';
+        printf("[Client] Server replied: %s", buffer);
+    } else {
+        printf("[Client] No reply or error.\n");
+    }
+
+    // Close the socket
+    CSocket_close(&client);
+    // Cleans up OpenSSL resources
+    CSocket_cleanup_ssl();
+
+    printf("[Client] SSL session closed.\n");
+    return 0;
+}
+```
 ## License
 This project is licensed under the MIT License
