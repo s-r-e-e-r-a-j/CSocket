@@ -24,6 +24,9 @@
 
 - **Powerful**: supports SSL, threaded servers, and RAW sockets in a single, easy-to-use API.
 
+## Compatibility
+- Linux (Debian, RHEL, Arch, etc..)
+- Termux(Android)
 
 ## Setup
 
