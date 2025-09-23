@@ -788,7 +788,7 @@ int main() {
     CSocket_init_ssl();
 
     // Enable SSL for this socket
-    CSocket_enable_ssl(&server,true, CERT_FILE, KEY_FILE);
+    CSocket_enable_ssl(&server, true, CERT_FILE, KEY_FILE);
 
     // Allow reusing the port immediately
     CSocket_set_reuseaddr(&server, true);
@@ -858,7 +858,7 @@ int main() {
     CSocket_init_ssl();
 
     // Enable SSL for this client socket
-    CSocket_enable_ssl(&client,false, NULL, NULL);  // No cert and key needed for client
+    CSocket_enable_ssl(&client, false, NULL, NULL);  // No cert and key needed for client
 
     // Connect to SSL server
     if (!CSocket_connect(&client, SERVER_IP, SERVER_PORT)) {
