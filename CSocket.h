@@ -53,7 +53,7 @@ static inline void CSocket_cleanup_ssl(){
 }
 
 // Auto-generate Self-signed Certificate 
-static inline bool CSocket_generate_cert(const char *cert_file, const char *key_file){
+static bool CSocket_generate_cert(const char *cert_file, const char *key_file){
     int ret = system("openssl req -x509 -newkey rsa:2048 -nodes -keyout server.key -out server.crt -days 365 -subj \"/CN=localhost\"");
     return ret == 0;
 }
@@ -101,7 +101,7 @@ static inline void CSocket_set_reuseaddr(CSocket *s,bool reuse){
 }
 
 // SSL/TLS Functions 
-static inline bool CSocket_enable_ssl(CSocket *s,bool server, const char *cert_file, const char *key_file){
+static bool CSocket_enable_ssl(CSocket *s,bool server, const char *cert_file, const char *key_file){
     s->ctx = server ? SSL_CTX_new(TLS_server_method()) : SSL_CTX_new(TLS_client_method());
     if(!s->ctx) { s->last_error = ERR_get_error(); return false; }
 
@@ -134,7 +134,7 @@ static inline ssize_t CSocket_ssl_recv(CSocket *s,void *buf,size_t len){
 }
 
 // Server Functions 
-static inline bool CSocket_bind(CSocket *s,const char *host,uint16_t port){
+static bool CSocket_bind(CSocket *s,const char *host,uint16_t port){
     struct sockaddr_in addr4;
     struct sockaddr_in6 addr6;
     int r=-1;
@@ -154,13 +154,13 @@ static inline bool CSocket_bind(CSocket *s,const char *host,uint16_t port){
     return true;
 }
 
-static inline bool CSocket_listen(CSocket *s,int backlog){
+static bool CSocket_listen(CSocket *s,int backlog){
     if(s->type!=CS_TCP) return false;
     if(listen(s->fd,backlog)<0){ s->last_error=errno; return false; }
     return true;
 }
 
-static inline CSocket CSocket_accept(CSocket *s){
+static CSocket CSocket_accept(CSocket *s){
     CSocket client = CSocket_create(s->type,s->family);
     struct sockaddr_storage addr;
     socklen_t len=sizeof(addr);
@@ -175,7 +175,7 @@ static inline CSocket CSocket_accept(CSocket *s){
 }
 
 // Client Functions
-static inline bool CSocket_connect(CSocket *s,const char *host,uint16_t port){
+static bool CSocket_connect(CSocket *s,const char *host,uint16_t port){
     struct sockaddr_in addr4;
     struct sockaddr_in6 addr6;
     int r=-1;
@@ -280,7 +280,7 @@ static inline void *CSocket_client_thread(void *arg){
     return NULL;
 }
 
-static inline bool CSocket_start_threaded_server(CSocket *server, int backlog, CSocket_client_handler handler, void *userdata){
+static bool CSocket_start_threaded_server(CSocket *server, int backlog, CSocket_client_handler handler, void *userdata){
     if(!CSocket_listen(server, backlog)) return false;
     while(1){
         CSocket client = CSocket_accept(server);
