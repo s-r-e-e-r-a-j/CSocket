@@ -272,7 +272,7 @@ typedef struct {
     void *userdata;
 } CSocketThreadArg;
 
-static inline void *CSocket_client_thread(void *arg){
+static void *CSocket_client_thread(void *arg){
     CSocketThreadArg *data = (CSocketThreadArg*)arg;
     data->handler(data->client, data->userdata);
     CSocket_close(&data->client);
