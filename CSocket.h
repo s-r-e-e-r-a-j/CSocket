@@ -234,7 +234,7 @@ static inline ssize_t CSocket_recv(CSocket *s,void *buf,size_t len,char *host,ui
     }
 }
 
-static inline size_t CSocket_recv_until(CSocket *s,char *buf,size_t max_len,char delim){
+static size_t CSocket_recv_until(CSocket *s,char *buf,size_t max_len,char delim){
     size_t i=0;
     while(i<max_len-1){
         char c;
