@@ -211,7 +211,7 @@ static inline ssize_t CSocket_send(CSocket *s,const void *buf,size_t len,const c
     }
 }
 
-static inline bool CSocket_sendall(CSocket *s,const void *buf,size_t len){
+static bool CSocket_sendall(CSocket *s,const void *buf,size_t len){
     size_t total=0; const char *ptr=(const char*)buf;
     while(total<len){
         ssize_t sent = (s->protocol==CS_SSL) ? SSL_write(s->ssl, ptr+total, len-total) : send(s->fd,ptr+total,len-total,0);
