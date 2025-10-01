@@ -308,7 +308,7 @@ CSocket_sendall(&tcp_sock, msg, strlen(msg));
 ```
 - Sends all **data** (retries internally if needed).
 
-- Works only with **TCP/SSL** (stream sockets).
+- Supports **plain TCP** and **TCP over SSL/TLS** (stream sockets).
 
 - Not used for UDP (datagrams).
 
