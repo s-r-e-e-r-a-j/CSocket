@@ -221,7 +221,7 @@ static bool CSocket_sendall(CSocket *s,const void *buf,size_t len){
     return true;
 }
 
-static inline ssize_t CSocket_recv(CSocket *s,void *buf,size_t len,char *host,uint16_t *port){
+static ssize_t CSocket_recv(CSocket *s,void *buf,size_t len,char *host,uint16_t *port){
     if(s->protocol==CS_SSL) return SSL_read(s->ssl, buf, len);
     if(s->type==CS_TCP) return recv(s->fd,buf,len,0);
     else {
